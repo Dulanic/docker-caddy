@@ -47,5 +47,5 @@ jobs:
           build-args: |
             CADDY_VERSION=${{ steps.tag.outputs.tag }}
           tags: |
-            ghcr.io/xnaas/caddy:${{ env.REL_TYPE }}
-            ghcr.io/xnaas/caddy:${{ steps.tag.outputs.tag }}
+            ghcr.io/dulanic/caddy:${{ env.REL_TYPE }}
+            ghcr.io/dulanic/caddy:${{ steps.tag.outputs.tag }}
