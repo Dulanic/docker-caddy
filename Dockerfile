@@ -8,7 +8,7 @@ RUN apk --no-cache add wget ca-certificates
 WORKDIR /src
 RUN wget https://github.com/caddyserver/caddy/raw/master/cmd/caddy/main.go
 RUN sed -i '34i\\t_ "github.com/caddy-dns/cloudflare"' main.go
-RUN sed -i '34i\\t_ "github.com/sjtug/caddy2-filter"' main.go
+RUN sed -i '34i\\t_ "github.com/caddyserver/replace-response"' main.go
 RUN go mod init caddy
 RUN go get github.com/caddyserver/caddy/v2@$CADDY_VERSION
 RUN go mod tidy
