@@ -11,7 +11,7 @@ RUN sed -i '34i\\t_ "github.com/caddy-dns/cloudflare"' main.go
 RUN sed -i '34i\\t_ "github.com/caddyserver/replace-response"' main.go
 RUN go mod init caddy
 RUN go get github.com/caddyserver/caddy/v2@$CADDY_VERSION
-RUN go mod tidy -e
+RUN go mod tidy -compat=1.17
 RUN CGO_ENABLED=0 go build
 # https://w.wiki/JQC
 RUN wget https://raw.githubusercontent.com/xnaas/webserver/master/caddy/mime.types
