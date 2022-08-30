@@ -3,7 +3,7 @@
 FROM golang:1.18-alpine AS src
 ARG CADDY_VERSION
 
-RUN apk --no-cache add wget ca-certificates
+RUN apk --no-cache add wget ca-certificates git
 
 WORKDIR /src
 RUN wget https://github.com/caddyserver/caddy/raw/master/cmd/caddy/main.go
