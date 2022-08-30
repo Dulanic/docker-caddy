@@ -9,7 +9,7 @@ WORKDIR /src
 RUN wget https://github.com/caddyserver/caddy/raw/master/cmd/caddy/main.go
 RUN sed -i '34i\\t_ "github.com/caddy-dns/cloudflare"' main.go
 RUN sed -i '34i\\t_ "github.com/caddyserver/replace-response"' main.go
-RUN sed -i '34i\\t_ "github.com/caddyserver/caddy-webdav"' main.go
+RUN sed -i '34i\\t_ "github.com/mholt/caddy-webdav"' main.go
 RUN go mod init caddy
 RUN go mod tidy -compat=1.17
 RUN go get github.com/caddyserver/caddy/v2@$CADDY_VERSION
