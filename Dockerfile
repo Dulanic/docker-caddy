@@ -5,6 +5,6 @@ RUN xcaddy build \
     --with github.com/mholt/caddy-webdav \
     --with github.com/caddyserver/replace-response
 
-FROM caddy:2.5.2
+FROM caddy:2.6.2
 
 COPY --from=builder /usr/bin/caddy /usr/bin/caddy
