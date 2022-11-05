@@ -3,7 +3,7 @@
 [Caddyserver](https://github.com/caddyserver/caddy/) with the following modules included:
 
 * [Cloudflare DNS module](https://github.com/caddy-dns/cloudflare)
-* [caddy2-filter](https://github.com/sjtug/caddy2-filter)
+* [replace-response](https://github.com/caddyserver/replace-response)
 * [Webdav](https://github.com/caddyserver/caddy-webdav)
 ## example
 
