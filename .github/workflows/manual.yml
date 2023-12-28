@@ -1,0 +1,42 @@
+name: Manual Publish
+
+on:
+  workflow_dispatch: # This event triggers the workflow manually
+
+jobs:
+  build-and-push-image:
+    runs-on: ubuntu-latest 
+    permissions: 
+      contents: read
+      packages: write 
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Log in to GitHub Docker Registry
+        uses: docker/login-action@v1
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GH_PAT }}
+
+      - name: Get version tag
+        id: tag
+        run: echo ::set-output name=tag::${GITHUB_REF#refs/*/}
+      - name: Tag stable by default
+        run: echo "REL_TYPE=stable" >> $GITHUB_ENV
+      - name: Tag beta if beta
+        if: contains(steps.tag.outputs.tag, 'beta')
+        run: echo "REL_TYPE=beta" >> $GITHUB_ENV
+      - name: Tag rc if rc
+        if: contains(steps.tag.outputs.tag, 'rc')
+        run: echo "REL_TYPE=rc" >> $GITHUB_ENV
+
+      - name: Build container image
+        uses: docker/build-push-action@v2
+        with:
+          push: true
+          build-args: |
+            CADDY_VERSION=${{ steps.tag.outputs.tag }}
+          tags: |
+            ghcr.io/dulanic/caddy:${{ env.REL_TYPE }}
+            ghcr.io/dulanic/caddy:${{ steps.tag.outputs.tag }}
